@@ -1,0 +1,11 @@
+{
+    "model": "rarerestapi.rareusers",
+    "pk": 1,
+    "fields": {
+        "bio": "A Dragon Ball Z super fan",
+        "profile_image_url" = ""
+        "created_on": "2020-08-28T14:51:39.989Z",
+        "active": true,
+        "user_id": 1
+    }
+},
