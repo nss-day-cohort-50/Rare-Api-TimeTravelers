@@ -5,5 +5,13 @@
         "--load-plugins=pylint_django",
         "--django-settings-module=rarerest.settings",
     ],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Rare Table",
+            "database": "db.sqlite3"
+        }
+    ],
     
 }

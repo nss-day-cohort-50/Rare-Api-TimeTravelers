@@ -1,0 +1,12 @@
+[
+    {
+        "model": "rarerestapi.reactions",
+        "pk": 1,
+        "fields": {
+            "label": "Surprised",
+            "image_url": "none"
+        }
+    }
+
+    
+]

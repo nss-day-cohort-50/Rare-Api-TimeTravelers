@@ -14,12 +14,13 @@ class PostView(ViewSet):
         post = Posts.objects.get(pk=request.data['gameId'])
 
         try:
-            event = Event.objects.create(
-                game=game,
+            post = Posts.objects.create(
+                title=title,
                 organizer=organizer,
-                description=request.data['description'],
-                date=request.data['date'],
-                time=request.data['time']
+                publications_date=request.data[]
+                content=request.data['content'],
+                approved=request.data['approved'],
+                image_url=request.data['image_url']
             )
             event_serializer = EventSerializer(event, context={'request': request})
             return Response(event_serializer.data, status=status.HTTP_201_CREATED)
