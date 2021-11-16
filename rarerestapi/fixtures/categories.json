@@ -1,0 +1,11 @@
+[
+    {
+        "model": "rarerestapi.categories",
+        "pk": 1,
+        "fields": {
+            "label": "Scary"
+        }
+    }
+
+    
+]
