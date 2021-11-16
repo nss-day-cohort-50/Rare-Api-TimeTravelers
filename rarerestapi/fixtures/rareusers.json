@@ -9,5 +9,16 @@
         "active": true,
         "user_id": 1
     }
+},
+{
+    "model": "rarerestapi.rareusers",
+    "pk": 4,
+    "fields": {
+        "bio": "A Dragon Ball Z super fan",
+        "profile_image_url": "null",
+        "created_on": "2020-08-28",
+        "active": true,
+        "user_id": 4
+    }
 }
 ]
