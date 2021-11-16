@@ -28,12 +28,12 @@ class PostView(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request):
-        gamer = Gamer.objects.get(user=request.auth.user)
+        post = Posts.objects.get(user=request.auth.user)
         events = Event.objects.all()
 
     
         for event in events:
-            event.joined = gamer in event.attendees.all()
+            event.joined = post in event.attendees.all()
         game = self.request.query_params.get('gameId', None)
         if game is not None:
             events = events.filter(game__id=type)
@@ -65,32 +65,6 @@ class PostView(ViewSet):
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
     @action(methods=['post', 'delete'], detail=True)
-    def signup(self, request, pk=None):
-        """Managing gamers signing up for events"""
-        gamer = Gamer.objects.get(user=request.auth.user)
-        try: 
-            event = Event.objects.get(pk=pk)
-        except Event.DoesNotExist:
-            return Response(
-                {'message': 'Event does not exist.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-    
-        if request.method == "POST":
-            try:
-                event.attendees.add(gamer)
-                return Response({}, status=status.HTTP_201_CREATED)
-            except Exception as ex:
-                return Response({'message': ex.args[0]})
-
-        elif request.method == "DELETE":
-            try:
-                event.attendees.remove(gamer)
-                return Response(None, status=status.HTTP_204_NO_CONTENT)
-            except Exception as ex:
-                return Response({'message': ex.args[0]})
-
 
 
 class UserSerializer(ModelSerializer):
@@ -98,20 +72,10 @@ class UserSerializer(ModelSerializer):
         model = User
         fields = ('first_name', 'last_name')
 
-class GamerSerializer(ModelSerializer):
+class PostSerializer(ModelSerializer):
     user = UserSerializer()
 
     class Meta:
-        model = Gamer
+        model = Posts
         fields = ['user']
-
-
-class EventSerializer(serializers.ModelSerializer):
-    organizer = GamerSerializer()
-    joined = BooleanField(required=False)
-    
-    class Meta:
-        model = Event
-        fields = ['id', 'organizer', 'game', 'date', 'time', 'description', 'attendees', 'joined']
-        depth = 2
 
