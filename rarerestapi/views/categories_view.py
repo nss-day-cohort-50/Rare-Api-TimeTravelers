@@ -5,7 +5,7 @@ from rest_framework import serializers
 from rarerestapi.models import Categories
 
 
-class CategoriesView(ViewSet):
+class CategoryView(ViewSet):
 
     def retrieve(self, request, pk=None):
         """Handle GET requests for single category
