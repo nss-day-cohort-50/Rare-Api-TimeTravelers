@@ -9,8 +9,8 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "Rare Table",
-            "database": "db.sqlite3"
+            "name": "Rarest",
+            "database": "/Users/alicia/workspace/levelup-server/db.sqlite3"
         }
     ],
     
