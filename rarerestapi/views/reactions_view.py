@@ -14,17 +14,16 @@ class ReactionView(ViewSet):
         image_url = Reactions.objects.get()
 
         try:
-            event = Event.objects.create(
+            reaction = Reactions.objects.create(
                 label=label,
                 image=image_url,
             )
-            reaction_serializer = ReactionSerializer(event, context={'request': request})
+            reaction_serializer = ReactionSerializer(reaction, context={'request': request})
             return Response(reaction_serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request):
-        label = Reactions.objects.get()
         reactions = Reactions.objects.all()
 
     

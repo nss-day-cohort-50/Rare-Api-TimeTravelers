@@ -49,17 +49,6 @@ class PostView(ViewSet):
         post_serializer = PostSerializer(post, context={'request': request})
         return Response(post_serializer.data)
 
-    @action(methods=['post', 'delete'], detail=True)
-
-
-class UserSerializer(ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name')
-
-class PostSerializer(ModelSerializer):
-    user = UserSerializer()
-
     class Meta:
         model = Posts
         fields = ['user', 'title', 'category', 'publication_date', 'approved', 'content']
