@@ -3,6 +3,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
 from rarerestapi.models import Categories
+from rest_framework import status
 
 
 class CategoryView(ViewSet):
@@ -31,6 +32,18 @@ class CategoryView(ViewSet):
         serializer = CategoriesSerializer(
             categories, many=True, context={'request': request})
         return Response(serializer.data)
+    
+    def create(self, request):
+
+        try:
+            category = Categories.objects.create(
+                label=request.data["label"]
+            )
+            serializer = CategoriesSerializer(category, context={'request': request})
+            return Response(serializer.data)
+        
+        except ValueError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
 class CategoriesSerializer(serializers.ModelSerializer):
     """JSON serializer for categories
