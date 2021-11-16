@@ -11,7 +11,7 @@ from rarerestapi.models import RareUsers
 @permission_classes([AllowAny])
 def login_user(request):
     
-    username = request.data['username']
+    username = request.data['email']
     password = request.data['password']
 
     # Use the built-in authenticate method to verify
@@ -46,16 +46,16 @@ def register_user(request):
 
    
     rare_user = RareUsers.objects.create(
-        bio=request.data['bio'],
-        profile_image_url=['profileImg'],
-        created_on=['createdON'],
-        active=['active'],
-        user_id=['userId']
+        bio= "",
+        profile_image_url="",
+        created_on= "2021-08-08",
+        active= True,
+        user= new_user
         
     )
 
     # Use the REST Framework's token generator on the new user account
-    token = Token.objects.create(user=rare_user.user_id)
+    token = Token.objects.create(user=rare_user.user)
     # Return the token to the client
     data = { 'token': token.key }
     return Response(data)
