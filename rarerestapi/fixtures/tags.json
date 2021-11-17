@@ -1,0 +1,11 @@
+[
+    {
+        "model": "rarerestapi.tags",
+        "pk": 1,
+        "fields": {
+            "label": "New tag"
+        }
+    }
+
+    
+]

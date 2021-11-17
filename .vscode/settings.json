@@ -10,7 +10,7 @@
             "previewLimit": 50,
             "driver": "SQLite",
             "name": "Rarest",
-            "database": "/Users/alicia/workspace/levelup-server/db.sqlite3"
+            "database": "${workspaceFolder:Rare-Api-TimeTravelers}/db.sqlite3"
         }
     ],
     
