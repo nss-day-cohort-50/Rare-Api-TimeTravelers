@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 
 class TagView(ViewSet):
     def create(self, request):
-        label = Tags.objects.get()
+        label = request.data["label"]
         
 
         try:
@@ -24,9 +24,6 @@ class TagView(ViewSet):
 
     def list(self, request):
         tags = Tags.objects.all()
-
-    
-  
 
         serializer = TagSerializer(
             tags, many=True, context={'request': request})

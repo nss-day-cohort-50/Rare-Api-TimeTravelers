@@ -9,8 +9,10 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
+
             "name": "Rare Table",
             "database": "db.sqlite3"
+
         }
     ],
     
