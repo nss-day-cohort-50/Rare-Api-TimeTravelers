@@ -27,7 +27,7 @@ class CategoryView(ViewSet):
         Returns:
             Response -- JSON serialized list of categories
         """
-        categories = Categories.objects.all()
+        categories = Categories.objects.all().order_by("label")
 
         serializer = CategoriesSerializer(
             categories, many=True, context={'request': request})
