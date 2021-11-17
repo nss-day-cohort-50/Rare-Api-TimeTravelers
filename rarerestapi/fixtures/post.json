@@ -1,0 +1,17 @@
+[
+    {
+        "model": "rarerestapi.posts",
+        "pk": 1,
+        "fields": {
+            "user": "3",
+            "category_id": "1",
+            "title": "New Post",
+            "publication_date": "2021-12-12",
+            "image_url": "null",
+            "content": "This is a post",
+            "approved": true
+        }
+    }
+
+    
+]

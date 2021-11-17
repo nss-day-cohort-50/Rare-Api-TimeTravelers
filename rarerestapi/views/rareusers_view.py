@@ -1,5 +1,8 @@
 from django.http import HttpResponseServerError
+from django.core.exceptions import ValidationError
+from django.utils.translation import activate
 from rest_framework.viewsets import ViewSet
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, BooleanField 
@@ -30,18 +33,20 @@ class RareUserView(ViewSet):
         return Response(serializer.data)
     
     def create(self, request):
-        user_id = user.objects.get(user=request.auth.user)
+        user = User.objects.get(user=request.auth.user)
         
 
         try:
-            event = Event.objects.create(
+            rare_user = RareUsers.objects.create(
+                user=user,
+                bio=request.data['bio'],
+                profile_image_url=request.data['profile_image_url'],
+                created_on=request.data['created_on'],
+                active=request.data['active']
                 
-                description=request.data['description'],
-                date=request.data['date'],
-                time=request.data['time']
             )
-            event_serializer = EventSerializer(event, context={'request': request})
-            return Response(event_serializer.data, status=status.HTTP_201_CREATED)
+            rare_user_serializer = RareUserSerializer(rare_user, context={'request': request})
+            return Response(rare_user_serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
     
@@ -49,7 +54,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', "email"]
+        fields = ['id','first_name', 'last_name', 'username', "email"]
 
 class RareUserSerializer(serializers.ModelSerializer):
     user = UserSerializer()
