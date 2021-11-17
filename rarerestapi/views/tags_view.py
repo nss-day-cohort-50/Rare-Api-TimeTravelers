@@ -10,7 +10,7 @@ from rest_framework.decorators import action
 
 class TagView(ViewSet):
     def create(self, request):
-        label = Tags.objects.get()
+        label = request.data["label"]
         
 
         try:
