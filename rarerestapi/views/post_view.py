@@ -40,13 +40,13 @@ class PostView(ViewSet):
         post_serializer = PostSerializer(post, context={'request': request})
         return Response(post_serializer.data)
 
-    @action(methods=['GET'], detail=True)
-    def MyPosts(self, request, pk=None):
+    @action(methods=['GET'], detail=False)
+    def myPosts(self, request):
         user = RareUsers.objects.get(user=request.auth.user)
 
         try:
-            post = Posts.objects.get(pk=pk)
-            post_serializer = PostSerializer(post, context={'request': request})
+            post = Posts.objects.filter(user = user)
+            post_serializer = PostSerializer(post, many=True, context={'request': request})
             return Response(post_serializer.data)
         except Posts.DoesNotExist:
             return Response(
