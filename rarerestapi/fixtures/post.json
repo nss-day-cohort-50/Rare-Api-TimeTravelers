@@ -3,7 +3,7 @@
         "model": "rarerestapi.posts",
         "pk": 1,
         "fields": {
-            "user": "3",
+            "user": "4",
             "category_id": "1",
             "title": "New Post",
             "publication_date": "2021-12-12",

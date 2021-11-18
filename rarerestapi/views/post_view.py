@@ -40,6 +40,20 @@ class PostView(ViewSet):
         post_serializer = PostSerializer(post, context={'request': request})
         return Response(post_serializer.data)
 
+    @action(methods=['GET'], detail=True)
+    def MyPosts(self, request, pk=None):
+        user = RareUsers.objects.get(user=request.auth.user)
+
+        try:
+            post = Posts.objects.get(pk=pk)
+            post_serializer = PostSerializer(post, context={'request': request})
+            return Response(post_serializer.data)
+        except Posts.DoesNotExist:
+            return Response(
+                {'message': 'Post does not exist.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )    
+
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
